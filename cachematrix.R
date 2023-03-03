@@ -7,12 +7,13 @@ makeCacheMatrix <- function(x = matrix()) {
     
     newMatrix <- NULL
 
-    setmatrix <- function(y) {
+    setMatrix <- function(y) {
         x <<- y
         newMatrix <<- NULL
     }
     
-    getmatrix <- function() x
+    getMatrix <- function() x
+        newMatrix <<- x
 
 }
 
@@ -21,10 +22,12 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-    cacheMatrix <- solve(x)
-    
-    if (cacheMatrix == x) {
-        cacheMateix <- NULL
-    }
+    newMatrix <- makeCacheMatrix$getMatrix()
 
+    if (!is.null(newMatrix) && newMatrix == x) {
+        return(newMatrix)
+    }
+    
+    inversedMatrix <<- solve(newMatrix)
+    return(inversedMatrix)
 }
