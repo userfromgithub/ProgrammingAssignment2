@@ -1,5 +1,6 @@
 ## Put comments here that give an overall description of what your
 ## functions do
+
 # This project provides the functions of creating a matrix that can cache its own inverse matrix,
 # and cache the inverse of the matrix
 
@@ -8,7 +9,7 @@
 # to create a matrix that can cache its inverse matrix
 makeCacheMatrix <- function(x = matrix()) {
     
-    # first of all, create and initialize the variable, inverseMatrix, and set its value to null
+    # first of all, create and initialize the variable inverseMatrix, and set its value to null
     inverseMatrix <- NULL
     
     # set the matrix by giving a matrix as argument
@@ -24,16 +25,16 @@ makeCacheMatrix <- function(x = matrix()) {
         return(x) # return the given matrix
     }
     
-    # set the inverse of the matrix
-    setInverse <- function(solve) {
+    # set the inverse of the matrix by giving it as argument
+    setInverse <- function(solve = matrix()) {
 
-        x <<- solve # assign the nverse of matrix to the variable x
+        x <<- solve # assign the inverse of matrix to the variable x
     }
     
     # get the inverse of the matrix
     getInverse <- function() {
 
-        return(x)
+        return(x) # return the inverse of the matrix
     }
     
     # combine the four inner functions to a list, so that the functions can be called by using '$'
@@ -49,21 +50,23 @@ makeCacheMatrix <- function(x = matrix()) {
 # to cache the inverse of the matrix
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
-    inverseMatrix <- x$getInverse()
+    
+    inverseMatrix <- x$getInverse() # initialize the variable inverseMatrix with the inverse of matrix
     
     # first, check whether the given matrix is already inversed and does not change
     if (!is.null(inverseMatrix) && identical(inverseMatrix, x)) {
         
-        return(inverseMatrix) # if true, return the inversed matrix to the function
+        return(inverseMatrix) # if true, return the inverse of matrix to the function
     } # end if
     else { # otherwise,
 
-        matrix <- x$getMatrix() # get the given matrix
+        matrix <- x$getMatrix() # get the given matrix, and assign it to the variable matrix
        
-        inverseMatrix <- solve(matrix) # assign the inversed matrix to the variable inverseMatrix
-        x$setInverse(inverseMatrix) # inverse the given matrix, and assign the value to the variable called result
+        inverseMatrix <- solve(matrix) # assign the inverse of matrix to the variable inverseMatrix,
+                                       # here using the method 'solve', since only the square matrices have its inverse
+        x$setInverse(inverseMatrix) # inverse the given matrix, and assign the value to the variable called inverseMatrix
 
-        return(inverseMatrix) # return the value of result to the function
+        return(inverseMatrix) # return the value of inverseMatrix to the function
     } # end else
 
 } # end function
